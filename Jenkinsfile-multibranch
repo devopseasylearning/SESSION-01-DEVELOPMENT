@@ -54,6 +54,7 @@ options {
        stage('build images') {
             steps {
                 sh '''
+                echo $BRANCH_NAME
 sudo cp -r /home/ansible/webapp.war .
 rm -rf Dockerfile || true 
 cat <<EOF > Dockerfile
