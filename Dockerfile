@@ -1,6 +1,7 @@
 FROM tomcat:8.0-alpine
 COPY /home/ansible/webapp.war  /usr/local/tomcat/webapps
+RUN mkdir More
 VOLUME /volume
-VOLUME /gueno3
-ENV key=pair
-ENV p=mg
+VOLUME /steve
+
+
