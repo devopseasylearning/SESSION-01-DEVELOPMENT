@@ -2,5 +2,5 @@ FROM tomcat:8.0-alpine
 COPY /home/ansible/webapp.war  /usr/local/tomcat/webapps
 VOLUME /volume
 VOLUME /steve
-ENV key=pair
-ENV p=mg
+ENV var=key
+ENV test=yes
