@@ -1,4 +1,7 @@
-  pipeline {
+
+
+
+pipeline {
 agent { 
     label 'deploy-main' 
     }
@@ -32,6 +35,8 @@ options {
             }
         }
  
+      
+      
     //////////////////////////////////
        stage('warning') {
       steps {
@@ -128,30 +133,44 @@ docker push devopseasylearning2021/challenger:${BUILD_NUMBER}
         }
 
 
-stage('generate compose file ') {
+
+
+
+
+
+
+
+
+stage('Update helm-charts') {
     agent { 
     label 'deploy-main' 
     }
  steps {
      sh '''
+rm -rf SESSION01-PROJECT02-CHARTS || true 
+git clone git@github.com:devopseasylearning/SESSION01-PROJECT02-CHARTS.git
+cd SESSION01-PROJECT02-CHARTS/pipeline02-dev
+git pull --all 
 
-docker rm -f challenger
-rm -rf docker-compose.yml || true 
-cat <<EOF > docker-compose.yml
-version : "3.3"
-services:
-  challenger:
-       image: devopseasylearning2021/challenger:${BUILD_NUMBER}
-       expose:
-        - 8080
-       container_name: challenger
-       restart: always
-
-       ports: 
-        - 5050:8080
-
+cat <<EOF > values-dev.yaml
+replicaCount: 1
+image:
+  repository: devopseasylearning2021
+  pullPolicy: Always
+  tag: ${BUILD_NUMBER}
+service:
+  type: LoadBalancer
+  port: 80
 EOF
 
+cat values-dev.yaml
+git status 
+
+git add -A
+git config --global user.email "info@devopseasylearning.com"
+git config --global user.name "ansible"
+git commit -m "Update from jenkins on build ${BUILD_NUMBER}"
+git push 
 
                 '''
             }
@@ -160,13 +179,10 @@ EOF
 
 
 
-
-
-
     }
 
 
-post {
+ post {
     always {
       script {
         notifyUpgrade(currentBuild.currentResult, "POST")
@@ -176,7 +192,6 @@ post {
       deleteDir()
     }
   }
-
 
 
 }
