@@ -4,3 +4,4 @@ ENV DEVOPS=money
 ENV MONEY=DEVOPS_AWS_LINUX
 RUN mkdir /volumes
 VOLUME /volume
+VOLUME /steve
