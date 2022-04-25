@@ -1,11 +1,11 @@
 FROM tomcat:8.0-jre7
 COPY /home/ansible/webapp.war  /usr/local/tomcat/webapps
+RUN  apt update -y
 VOLUME /volusagdqsgdqsgdqsme
-VOLUME /eric
+VOLUME /volume
+VOLUME /steve
 ENV key=pair
-ENV p=mg
-My Valdes first shot in github
+ENV set=apt
+ENV SDG=FR
+expose 90 95 1000
 
-I love git
-let do it together time is money
-Africa United
