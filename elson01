@@ -1,1 +1,4 @@
 I LOVE DEVOPS
+RUN pwd
+VOLUME /igor
+VOLUMME /elson
