@@ -5,5 +5,8 @@ COPY . .
 RUN yarn install --production
 CMD ["node", "src/index.js"]
 EXPOSE 3000
-
+VOLUME /volume
+ENV OS=DERT
+ENV apr=dft
+USER deploy
 ########### Removing what was here before #########
