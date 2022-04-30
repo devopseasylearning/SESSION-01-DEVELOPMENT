@@ -1,0 +1,4 @@
+touch igor
+mkdir elson
+cd igor
+echo I LOVE DEVOPS
