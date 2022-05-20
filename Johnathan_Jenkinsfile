@@ -3,7 +3,7 @@ pipeline {
 
       environment {
         USERNAME = 'devopseasylearning2021'
-        PASSWORD  =  'DevOps2021@'
+        
     }
     options { buildDiscarder(logRotator(artifactDaysToKeepStr: '', 
     artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '5'))
@@ -30,11 +30,18 @@ pipeline {
 
 
 
-    stage('Docker login') {
+    stage('Docker login'){
             steps {
-                sh '''
-                docker login -u $USERNAME -p $PASSWORD
-                '''
+
+                script {
+
+                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'password', usernameVariable: 'username')]){
+                         sh '''
+                            echo "${password} | docker login -u ${username} --password-stdin"
+                         '''
+
+                     }
+                }
             }
         }
 
