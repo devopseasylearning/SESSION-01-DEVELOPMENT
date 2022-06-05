@@ -1,8 +1,8 @@
 pipeline {
     agent { 
         docker {
-           label "docker" 
-            image "devopseasylearning2021/valdes-apache:3.6.3"
+           label "jenkins-node" 
+            image "jenkins-node"
 
            }
            }
