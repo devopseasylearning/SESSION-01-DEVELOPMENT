@@ -1,1 +1,99 @@
+pipeline {
+    agent { 
+        docker {
+           label "docker" 
+            image "apache-maven:3.6.3"
+           }
+           }
 
+    stages {
+        stage('clean') {
+            steps {
+                sh '''
+                mvn clean
+                '''
+            }
+        }
+
+stage('validate') {
+            steps {
+                sh '''
+                mvn validate
+                '''
+            }
+        }
+
+stage('compile') {
+            steps {
+                 sh '''
+                mvn compile
+                '''
+            }
+        }
+
+stage('test') {
+            steps {
+                 sh '''
+                mvn test
+                '''
+            }
+        }
+
+
+
+stage('package') {
+            steps {
+                 sh '''
+                mvn package
+                '''
+            }
+        }
+
+
+stage('install') {
+            steps {
+                 sh '''
+                mvn install
+                '''
+            }
+        }
+
+
+stage('build') {
+            steps {
+                 sh '''
+                docker build -t devopseasylearning2021/valdes:3.6.3
+                '''
+            }
+        }
+
+
+
+stage('Login') {
+
+			steps {
+				sh '''
+                echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
+                '''
+			}
+		}
+
+stage('Push') {
+
+			steps {
+				sh '''
+                docker push devopseasylearning2021/valdes:3.6.3
+                '''
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+    }
