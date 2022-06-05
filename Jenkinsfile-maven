@@ -2,7 +2,8 @@ pipeline {
     agent { 
         docker {
            label "docker" 
-            image "apache-maven:3.6.3"
+            image "devopseasylearning2021/valdes-apache:3.6.3"
+
            }
            }
 
@@ -90,10 +91,7 @@ stage('Push') {
 
 
 
+}
 
 
-
-
-
-
-    }
+}
