@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    options([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '3', numToKeepStr: '5')), disableConcurrentBuilds()])
+    stages {
+        stage('Tag image ') {
+            steps {
+                sh'''
+                docker build -t ivo:001 .
+                '''
+            }
+        }
+        stage {
+            steps ('Docker build ') {
+                sh'''
+                
+                '''
+
+        steps {
+                shstage ('Docker login') {
+            '''
+                
+                '''
+            }
+        }
+
+        stage ('docker ush') {
+            steps {
+                sh'''
+            docker push devopseaasylearning
+                '''
+            }
+        }
+    }
+}
