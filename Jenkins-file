@@ -6,7 +6,7 @@ pipeline {
         stage('buil image') {
             steps {
                 sh '''
-                docker run -i yvan:01 .
+                docker run -i centos:latest .
                 '''
             }
         }
