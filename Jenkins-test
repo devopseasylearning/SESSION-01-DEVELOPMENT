@@ -6,8 +6,7 @@ pipeline {
         stage('cleaning enviroment') {
             steps {
                 sh '''
-            service docker  start
-            systemctl enable docker 
+            
             docker rm -f $(docker ps -aq) || true 
                
                 '''
