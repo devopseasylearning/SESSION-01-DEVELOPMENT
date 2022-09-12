@@ -6,6 +6,8 @@ pipeline {
         stage('cleaning enviroment') {
             steps {
                 sh '''
+             sudo docker service start
+             sudo systemctl enable docker 
              docker rm -f $(docker ps -aq) || true 
                
                 '''
@@ -17,8 +19,7 @@ pipeline {
     stage('build the image') {
             steps {
                 sh '''
-             docker service start
-             systemctl enable docker   
+               
              docker build -t nginx:1.23.1 . 
                 '''
             }
