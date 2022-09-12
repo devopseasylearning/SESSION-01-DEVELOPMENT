@@ -6,9 +6,8 @@ pipeline {
         stage('cleaning enviroment') {
             steps {
                 sh '''
-             sudo docker service start
-             sudo systemctl enable docker 
-             docker rm -f $(docker ps -aq) || true 
+     
+            sudo docker rm -f $(docker ps -aq) || true 
                
                 '''
             }
@@ -20,7 +19,7 @@ pipeline {
             steps {
                 sh '''
                
-             docker build -t nginx:1.23.1 . 
+            sudo docker build -t nginx:1.23.1 . 
                 '''
             }
         }
@@ -36,7 +35,7 @@ pipeline {
     stage('launch container') {
             steps {
                 sh '''
-           docker run -i --name alex nginx:1.23.1
+           sudo docker run -i --name alex nginx:1.23.1
                 '''
             }
         }
