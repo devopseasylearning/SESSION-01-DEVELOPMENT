@@ -17,7 +17,7 @@ pipeline {
     stage('build the image') {
             steps {
                 sh '''
-              docker build -t nginx:1.23.1 . 
+              docker build -t nginx:latest . 
                 '''
             }
         }
