@@ -19,7 +19,7 @@ pipeline {
             steps {
                 sh '''
                
-            docker build -t nginx:1.23.1 . 
+            sudo docker build -t nginx:1.23.1 . 
                 '''
             }
         }
@@ -27,7 +27,7 @@ pipeline {
     stage('checking images') {
             steps {
                 sh '''
-           docker images
+          sudo docker images
                 '''
             }
         }
@@ -35,7 +35,7 @@ pipeline {
     stage('launch container') {
             steps {
                 sh '''
-           docker run -i --name alex nginx:1.23.1
+          sudo docker run -i --name alex nginx:1.23.1
                 '''
             }
         }
