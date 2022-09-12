@@ -1,3 +1,3 @@
-FROM: ubuntu
+FROM ubuntu
 RUN apt update
 RUN touch alex
