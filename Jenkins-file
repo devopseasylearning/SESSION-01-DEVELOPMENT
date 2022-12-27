@@ -1,0 +1,15 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('buil image') {
+            steps {
+                sh '''
+                docker run -i centos:latest .
+                '''
+            }
+        }
+        
+    }
+}
