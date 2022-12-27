@@ -1,0 +1,80 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('clean') {
+            agent { 
+            docker { image 'maven:3.8.5-openjdk-8-slim'}
+            steps {
+                sh '''
+                pwd
+                mvn clean
+
+                '''}
+            }
+        }
+        stage('validate') {
+            agent { docker (image 'maven:3.8.5-openjdk-8-slim')}
+            steps {
+                sh '''
+                ls
+
+                '''
+            }
+        }
+        
+        stage('compile') {
+            steps {
+                agent { docker (image 'maven:3.8.5-openjdk-8-slim')}
+                sh '''
+                ls -la
+
+                '''
+            }
+        }
+            stage('test') {
+                agent { docker (image 'maven:3.8.5-openjdk-8-slim')}
+            steps {
+                sh '''
+                mkdir ivo
+
+                '''
+            }
+        }
+        stage('package') {
+            agent { docker (image 'maven:3.8.5-openjdk-8-slim')}
+            steps {
+                sh '''
+                touch means
+
+                '''
+            }
+        }
+
+        
+        stage('verify') {
+            agent { docker (image 'maven:3.8.5-openjdk-8-slim')}
+            steps {
+                sh '''
+                mvn 
+
+                '''
+            }
+        }        
+
+        stage('install') {
+            agent { docker (image 'maven:3.8.5-openjdk-8-slim')}
+            steps {
+                sh '''
+                docker build -t devopseasylearning2021:001 .
+
+                '''
+        
+               
+            }
+            
+        
+
+    }
+
+}
