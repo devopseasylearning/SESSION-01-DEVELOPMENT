@@ -1,0 +1,93 @@
+pipeline{
+    agent {
+        label 'master'
+    }
+    parameters {
+        string(name: 'Greeting', defaultValue: 'Hello', description: 'How should I greet the world?')
+        choice(name: 'size', choices: ['S', 'M', 'L'],  description: 'Size choice (S/M/L)')
+        booleanParam(name: 'coffee-flavored', defaultValue: true,  description: 'something')
+    }
+    stages{
+        stage('clean'){
+            steps{
+                script {
+                   sh """
+                   pwd
+                   touch paul8
+
+                   """
+                    
+                }
+            }
+        }
+          stage('test'){
+            steps{
+                script {
+                   sh """
+                   cat /etc/*release
+                   nproc
+
+                   """
+                    
+                }
+            }
+        }
+          stage('commit'){
+            steps{
+                script {
+                   sh """
+                   pwd
+                   mkdir johnpaul8
+
+                   """
+       
+                }
+            }
+        }
+         stage('docker build'){
+            steps{
+                script {
+                   sh """
+                  docker image
+                   docker ps
+
+                   """
+       
+                }
+            }
+        }
+        stage('docker push'){
+            steps{
+                script {
+                   sh """
+                   docker image
+                   docker ps
+
+                   """
+       
+                }
+            }
+        }
+         stage('deploy'){
+            steps{
+                script {
+                   sh """
+                   echo 'deploy to pre-prod env'
+
+                   """
+       
+                }
+            }
+        }
+
+    }
+    post{
+        success {
+            echo 'finished with pass'
+        }
+        failure {
+            echo 'finished with failure'
+        }
+    }
+}
+   
